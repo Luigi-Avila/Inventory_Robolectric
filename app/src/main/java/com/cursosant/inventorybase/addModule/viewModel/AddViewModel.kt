@@ -1,5 +1,6 @@
 package com.cursosant.inventorybase.addModule.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cursosant.inventorybase.addModule.model.AddRepository
@@ -9,18 +10,17 @@ import com.cursosant.inventorybase.entities.Product
 class AddViewModel : ViewModel() {
     private val repository = AddRepository()
 
-    private val inProgress = MutableLiveData<Boolean>()
-    private val result = MutableLiveData<Boolean>()
+    private val _inProgress = MutableLiveData<Boolean>()
+    val inProgress: LiveData<Boolean> = _inProgress
 
-    fun isInProgress(): MutableLiveData<Boolean> = inProgress
-
-    fun getResult(): MutableLiveData<Boolean> = result
+    private val _result = MutableLiveData<Boolean>()
+    val result: LiveData<Boolean> = _result
 
     fun addProduct(product: Product){
-        inProgress.value = true
+        _inProgress.value = true
         repository.addProduct(product){
-            inProgress.value = false
-            result.value = it
+            _inProgress.value = false
+            _result.value = it
         }
     }
 }

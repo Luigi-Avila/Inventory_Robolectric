@@ -68,7 +68,7 @@ class AddProductFragment : DialogFragment(), DialogInterface.OnShowListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? = binding.root
+                              savedInstanceState: Bundle?): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,12 +83,14 @@ class AddProductFragment : DialogFragment(), DialogInterface.OnShowListener {
     }
 
     private fun setupObservers(){
-        viewModel.getResult().observe(viewLifecycleOwner, { result ->
+        viewModel.result.observe(viewLifecycleOwner){ result ->
             if (result) dismiss()
-        })
-        viewModel.isInProgress().observe(viewLifecycleOwner, { inProgress ->
+        }
+
+        viewModel.inProgress.observe(viewLifecycleOwner){ inProgress ->
             binding.progressBar.visibility = if (inProgress) View.VISIBLE else View.GONE
-        })
+
+        }
     }
 
     override fun onShow(p0: DialogInterface?) {
