@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="main_columns">3</integer>
+    <integer name="add_max_lines">1</integer>
+    <integer name="add_max_name">30</integer>
+</resources>

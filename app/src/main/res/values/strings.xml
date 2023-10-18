@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Inventory base</string>
+
+    <string name="add_hint_photoUrl">URL de foto</string>
+    <string name="add_hint_name">nombre del producto</string>
+    <string name="add_hint_quantity">cantidad</string>
+    <string name="add_title">Añadir producto</string>
+    <string name="add_dialog_ok">Añadir</string>
+    <string name="add_dialog_cancel">Cancelar</string>
+
+    <string name="common_validate_field_required">Campo obligatorio</string>
+    <string name="common_validate_min_quantity">El valor debe ser mayor a cero.</string>
+
+    <string name="description_main_fab_add">Botón para crear nuevo producto</string>
+    <string name="description_img_product">Imagen del producto</string>
+
+    <string name="item_product_data">%s \n(x%d)</string>
+    <string name="item_product_score">%.2f</string>
+
+    <string name="main_msg_welcome">Bienvenido…</string>
+</resources>
