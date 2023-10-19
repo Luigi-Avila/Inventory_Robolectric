@@ -9,8 +9,12 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
-
+// Configuration for android 14 sdk update (1)
+//@Config(sdk = [24, 33])
+// (2)
+@Config(maxSdk = 33)
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest{
     @get:Rule
