@@ -26,15 +26,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.setWelcome(value)
     }
 
-    private val welcome: MutableLiveData<Boolean> = MutableLiveData()
+    private val _welcome: MutableLiveData<Boolean> = MutableLiveData()
+    val welcome: LiveData<Boolean> = _welcome
 
     init {
         getWelcome()
     }
 
-    fun isWelcome(): MutableLiveData<Boolean> = welcome
-
     private fun getWelcome(){
-        welcome.value = repository.getWelcome()
+        _welcome.value = repository.getWelcome()
     }
 }

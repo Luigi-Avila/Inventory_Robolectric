@@ -31,37 +31,44 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         setupViewModel()
     }
 
-    private fun setupAdapter(){
+    private fun setupAdapter() {
         adapter = ProductAdapter(this)
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(this@MainActivity,
-                resources.getInteger(R.integer.main_columns))
+            layoutManager = GridLayoutManager(
+                this@MainActivity,
+                resources.getInteger(R.integer.main_columns)
+            )
             adapter = this@MainActivity.adapter
         }
     }
 
-    private fun setupFab(){
+    private fun setupFab() {
         binding.fab.setOnClickListener { //Open add fragment
             AddProductFragment().show(supportFragmentManager, getString(R.string.add_title))
         }
     }
 
-    private fun setupViewModel(){
+    private fun setupViewModel() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.getProducts().observe(this, { products ->
+        viewModel.getProducts().observe(this) { products ->
             setListToAdapter(products)
-        })
-        viewModel.isWelcome().observe(this, { isWelcome ->
-            if (isWelcome){
-                Snackbar.make(binding.root, getString(R.string.main_msg_welcome), Snackbar.LENGTH_SHORT).show()
+        }
+        viewModel.welcome.observe(this) { isWelcome ->
+            if (isWelcome) {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.main_msg_welcome),
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 viewModel.setWelcome(false)
             }
-        })
+        }
+
     }
 
     private fun setListToAdapter(products: List<Product>) {
