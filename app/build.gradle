@@ -35,6 +35,10 @@ android {
     buildFeatures{
         viewBinding true
     }
+    //This is for error No such manifest file: .\AndroidManifest.xml
+    testOptions{
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
