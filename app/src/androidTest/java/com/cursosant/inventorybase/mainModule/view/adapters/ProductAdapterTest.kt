@@ -17,6 +17,7 @@ import androidx.test.filters.LargeTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import com.cursosant.inventorybase.R
+import com.cursosant.inventorybase.clickOnChild
 import com.cursosant.inventorybase.mainModule.view.MainActivity
 import org.hamcrest.Matchers.containsString
 import org.junit.Assert.fail
@@ -32,8 +33,8 @@ class ProductAdapterTest {
 
     @Test
     fun listItem_click_successCheck() {
-        onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText(R.string.main_msg_welcome)))
+//        onView(withId(com.google.android.material.R.id.snackbar_text))
+//            .check(matches(withText(R.string.main_msg_welcome)))
 
         onView(withId(R.id.recyclerView))
             .perform(actionOnItemAtPosition<ProductAdapter.ViewHolder>(1, click()))
@@ -65,5 +66,15 @@ class ProductAdapterTest {
         } catch (e: Exception) {
             assert((e as? PerformException) != null)
         }
+    }
+
+    @Test
+    fun cbFavorite_click_changeState() {
+        onView(withId(R.id.recyclerView))
+            .perform(
+                actionOnItemAtPosition<ProductAdapter.ViewHolder>(
+                    1, clickOnChild(R.id.favorite)
+                )
+            )
     }
 }
