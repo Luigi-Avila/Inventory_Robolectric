@@ -3,7 +3,9 @@ package com.cursosant.inventorybase.mainModule.view.adapters
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -13,6 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import com.cursosant.inventorybase.R
 import com.cursosant.inventorybase.mainModule.view.MainActivity
+import org.hamcrest.Matchers.containsString
 import org.junit.Rule
 
 
@@ -33,5 +36,15 @@ class ProductAdapterTest {
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("Queso")))
+    }
+
+    @Test
+    fun listItem_click_removeFromView() {
+        onView(withId(R.id.recyclerView))
+            .perform(
+                actionOnItem<ProductAdapter.ViewHolder>(
+                    hasDescendant(withText(containsString("Soda"))), click()
+                )
+            )
     }
 }

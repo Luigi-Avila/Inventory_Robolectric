@@ -7,10 +7,10 @@ import kotlin.random.Random
 
 
 class MyDataBase {
-    companion object{
+    companion object {
         private var INSTANCE: MyDataBase? = null
 
-        fun getInstance() = INSTANCE ?: synchronized(this){
+        fun getInstance() = INSTANCE ?: synchronized(this) {
             MyDataBase().also { INSTANCE = it }
         }
     }
@@ -19,8 +19,8 @@ class MyDataBase {
     private val productsLiveData: MutableLiveData<MutableList<Product>> = MutableLiveData()
 
     fun getProductsLiveData(): LiveData<MutableList<Product>> {
-        if (products.size == 0){
-            (0..Random.nextInt(1, names.size)).forEach {
+        if (products.size == 0) {
+            (names.indices).forEach {//Random.nextInt(1, names.size)).forEach {
                 products.add(
                     Product(
                         id = it.toLong(),
@@ -39,26 +39,26 @@ class MyDataBase {
         return productsLiveData
     }
 
-    fun add(product: Product): Boolean{
-        return if (products.contains(product)){
+    fun add(product: Product): Boolean {
+        return if (products.contains(product)) {
             update(product)
         } else {
             products.add(product).also { getProductsLiveData() }
         }
     }
 
-    fun update(product: Product): Boolean{
+    fun update(product: Product): Boolean {
         val index = products.indexOf(product)
-        if (index != -1){
+        if (index != -1) {
             return products.set(index, product) != product.also { getProductsLiveData() }
         }
         return false
     }
 
-    fun delete(product: Product): Boolean{
+    fun delete(product: Product): Boolean {
         val index = products.indexOf(product)
-        if (index != -1){
-            if (products.removeAt(index) == product){
+        if (index != -1) {
+            if (products.removeAt(index) == product) {
                 getProductsLiveData()
                 return true
             }
@@ -67,9 +67,11 @@ class MyDataBase {
     }
 }
 
-private val names = listOf("Vino", "Queso", "Globo", "Sombrero", "Juguete", "Mango", "Chocolate",
+private val names = listOf(
+    "Vino", "Queso", "Globo", "Sombrero", "Juguete", "Mango", "Chocolate",
     "Vela", "SSD", "Shampoo", "TV", "Tazón", "Nevera", "Pepinillos",
-    "Hojas", "Bombilla", "Papas", "Jamón", "Tijeras", "Bolígrafo", "Soda")
+    "Hojas", "Bombilla", "Papas", "Jamón", "Tijeras", "Bolígrafo", "Soda"
+)
 
 private val urls = listOf(
     "https://cdn.pixabay.com/photo/2016/10/22/20/34/wines-1761613_960_720.jpg",
@@ -94,4 +96,5 @@ private val urls = listOf(
     "https://cdn.pixabay.com/photo/2017/05/02/14/55/black-forest-ham-2278383_960_720.jpg",
     "https://cdn.pixabay.com/photo/2014/04/10/19/53/scissors-321238_960_720.jpg",
     "https://cdn.pixabay.com/photo/2018/03/03/20/02/laptop-3196481_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2015/08/25/16/12/lime-907124_960_720.jpg")
+    "https://cdn.pixabay.com/photo/2015/08/25/16/12/lime-907124_960_720.jpg"
+)
