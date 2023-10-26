@@ -5,7 +5,6 @@ import androidx.test.espresso.PerformException
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.longClick
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.contrib.RecyclerViewActions.scrollTo
@@ -20,6 +19,7 @@ import org.junit.runner.RunWith
 import com.cursosant.inventorybase.R
 import com.cursosant.inventorybase.mainModule.view.MainActivity
 import org.hamcrest.Matchers.containsString
+import org.junit.Assert.fail
 import org.junit.Rule
 
 
@@ -61,6 +61,7 @@ class ProductAdapterTest {
                         hasDescendant(withText(containsString("Papas")))
                     )
                 )
+            fail("Papas is on the list yet!!")
         } catch (e: Exception) {
             assert((e as? PerformException) != null)
         }
