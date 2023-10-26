@@ -1,10 +1,14 @@
 package com.cursosant.inventorybase.mainModule.view.adapters
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.PerformException
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.longClick
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollTo
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -43,8 +47,22 @@ class ProductAdapterTest {
         onView(withId(R.id.recyclerView))
             .perform(
                 actionOnItem<ProductAdapter.ViewHolder>(
-                    hasDescendant(withText(containsString("Soda"))), click()
+                    hasDescendant(withText(containsString("Papas"))), longClick()
+                ),
+                scrollTo<ProductAdapter.ViewHolder>(
+                    hasDescendant(withText(containsString("Queso")))
                 )
             )
+
+        try {
+            onView(withId(R.id.recyclerView))
+                .perform(
+                    scrollTo<ProductAdapter.ViewHolder>(
+                        hasDescendant(withText(containsString("Papas")))
+                    )
+                )
+        } catch (e: Exception) {
+            assert((e as? PerformException) != null)
+        }
     }
 }
