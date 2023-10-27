@@ -17,17 +17,17 @@ import com.cursosant.inventorybase.R
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class MainActivityTest{
+class MainActivityTest {
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun actionBar_menuItemClick_returnMessage(){
+    fun actionBar_menuItemClick_returnMessage() {
         onView(withId(R.id.recyclerView)).perform(click())
 
         onView(withId(R.id.action_history)).perform(click())
 
-            // For dynamic messages like different languages
+        // For dynamic messages like different languages
         var snackBarMessage = ""
         activityScenarioRule.scenario.onActivity { activity ->
             snackBarMessage = activity.resources.getString(R.string.menu_msg_history)
@@ -38,15 +38,23 @@ class MainActivityTest{
     }
 
     @Test
-    fun menuContext_actionExit_returnsMessage(){
+    fun menuContext_actionExit_returnsMessage() {
         onView(withId(R.id.recyclerView)).perform(click())
 
         // Open Menu
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
 
-        onView(withText(R.string.main_menu_title_exit)).perform(click())
+        var actionTitle = ""
+        var snackBarMessage = ""
+        activityScenarioRule.scenario.onActivity { activity ->
+            actionTitle = activity.resources.getString(R.string.main_menu_title_exit)
+            snackBarMessage = activity.resources.getString(R.string.menu_msg_exit)
+        }
+
+
+        onView(withText(actionTitle)).perform(click())
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText(R.string.menu_msg_exit)))
+            .check(matches(withText(snackBarMessage)))
     }
 }
