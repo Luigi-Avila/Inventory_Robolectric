@@ -1,6 +1,8 @@
 package com.cursosant.inventorybase.mainModule.view
 
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -27,5 +29,18 @@ class MainActivityTest{
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText(R.string.menu_msg_history)))
+    }
+
+    @Test
+    fun menuContext_actionExit_returnsMessage(){
+        onView(withId(R.id.recyclerView)).perform(click())
+
+        // Open Menu
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+
+        onView(withText(R.string.main_menu_title_exit)).perform(click())
+
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText(R.string.menu_msg_exit)))
     }
 }
