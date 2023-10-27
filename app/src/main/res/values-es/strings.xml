@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Inventory base</string>
-
     <string name="add_hint_photoUrl">URL de foto</string>
     <string name="add_hint_name">nombre del producto</string>
     <string name="add_hint_quantity">cantidad</string>
@@ -18,8 +17,8 @@
     <string name="item_product_score">%.2f</string>
 
     <string name="main_msg_welcome">Bienvenido…</string>
-    <string name="main_menu_title_exit">Exit</string>
-    <string name="menu_msg_history">Go to history</string>
-    <string name="menu_msg_exit">Exit…</string>
-    <string name="main_msg_not_found">Action not found.</string>
+    <string name="main_menu_title_exit">Salir</string>
+    <string name="menu_msg_history">Ir al historial</string>
+    <string name="menu_msg_exit">Salir…</string>
+    <string name="main_msg_not_found">Acción no encontrada.</string>
 </resources>

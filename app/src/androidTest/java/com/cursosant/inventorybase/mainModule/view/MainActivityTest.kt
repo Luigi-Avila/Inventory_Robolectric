@@ -27,8 +27,14 @@ class MainActivityTest{
 
         onView(withId(R.id.action_history)).perform(click())
 
+            // For dynamic messages like different languages
+        var snackBarMessage = ""
+        activityScenarioRule.scenario.onActivity { activity ->
+            snackBarMessage = activity.resources.getString(R.string.menu_msg_history)
+        }
+
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText(R.string.menu_msg_history)))
+            .check(matches(withText(snackBarMessage)))
     }
 
     @Test
