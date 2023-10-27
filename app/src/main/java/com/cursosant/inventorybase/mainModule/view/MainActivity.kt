@@ -2,6 +2,8 @@ package com.cursosant.inventorybase.mainModule.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cursosant.inventorybase.R
@@ -29,6 +31,21 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         setupFab()
 
         setupViewModel()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val message = when(item.itemId){
+            R.id.action_history -> getString(R.string.menu_msg_history)
+            R.id.action_exit -> getString(R.string.menu_msg_exit)
+            else -> getString(R.string.main_msg_not_found)
+        }
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupAdapter() {
